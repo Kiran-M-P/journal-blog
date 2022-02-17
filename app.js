@@ -17,6 +17,22 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.get("/", function (req, res) {
+  res.render("home", { startingContent: homeStartingContent });
+});
+
+app.get("/about", function (req, res) {
+  res.render("about", { about: aboutContent });
+});
+
+app.get("/contact", function (req, res) {
+  res.render("contact", { contact: contactContent });
+});
+
+app.get("/compose", function (req, res) {
+  res.render("compose");
+});
+
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
