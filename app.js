@@ -1,5 +1,3 @@
-//jshint esversion:6
-
 const express = require("express");
 const ejs = require("ejs");
 
@@ -35,7 +33,8 @@ app.get("/compose", function (req, res) {
 });
 
 app.post("/compose", function (req, res) {
-  console.log(req.body.postTitle);
+  const post = { title: req.body.postTitle, content: req.body.postBody };
+  console.log(post);
 });
 app.listen(3000, function () {
   console.log("Server started on port 3000");
