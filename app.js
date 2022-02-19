@@ -1,5 +1,6 @@
 const express = require("express");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 let posts = [];
 
@@ -38,10 +39,10 @@ app.get("/compose", function (req, res) {
 });
 
 app.get("/posts/:postName", (req, res) => {
-  const requestedTitle = req.params.postName;
+  const requestedTitle = _.lowerCase(req.params.postName);
 
   posts.forEach(function (post) {
-    const storedTitle = post.title;
+    const storedTitle = _.lowerCase(post.title);
 
     if (storedTitle === requestedTitle) {
       console.log("Match found!");
