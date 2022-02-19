@@ -20,6 +20,7 @@ app.use(express.static("public"));
 // home page
 app.get("/", function (req, res) {
   res.render("home", { startingContent: homeStartingContent, posts: posts });
+  console.log(posts);
 });
 
 // about page
