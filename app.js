@@ -2,6 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const _ = require("lodash");
 
+// array with all post objs
 let posts = [];
 
 const homeStartingContent =
@@ -38,6 +39,18 @@ app.get("/compose", function (req, res) {
   res.render("compose");
 });
 
+app.post("/compose", function (req, res) {
+  const postUrl = _.kebabCase(_.lowerCase(req.body.postTitle));
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody,
+    url: postUrl,
+  };
+  posts.push(post);
+  res.redirect("/");
+});
+
+// post page
 app.get("/posts/:postName", (req, res) => {
   const requestedTitle = _.lowerCase(req.params.postName);
 
@@ -52,11 +65,6 @@ app.get("/posts/:postName", (req, res) => {
   });
 });
 
-app.post("/compose", function (req, res) {
-  const post = { title: req.body.postTitle, content: req.body.postBody };
-  posts.push(post);
-  res.redirect("/");
-});
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
